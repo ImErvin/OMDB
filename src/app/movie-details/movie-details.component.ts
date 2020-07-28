@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OmdbServiceService } from '../services/omdb-service.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -6,10 +8,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./movie-details.component.sass']
 })
 export class MovieDetailsComponent implements OnInit {
+  imdbID = null;
+  query = {
+    i: null,
+    plot: 'full'
+  };
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private omdbService: OmdbServiceService
+  ) {}
 
-  ngOnInit(): void {
+  getMovie(query) {
+    this.omdbService.getMovies(query).subscribe(data => console.log(data));
   }
 
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.query.i = params['imdbId'];
+      this.getMovie(this.query);
+    });
+  }
 }
