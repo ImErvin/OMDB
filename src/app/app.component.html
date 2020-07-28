@@ -1,0 +1,34 @@
+<div class="container py-5">
+  <div class="columns">
+    <div class="column is-full">
+      <form>
+        <div class="field">
+          <p class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              placeholder="Enter movie title.."
+              [(ngModel)]="search.s"
+              [ngModelOptions]="{standalone: true}"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field is-pulled-right">
+          <div class="control">
+            <button (click)="applySearch(search)" class="button is-link">Search</button>
+          </div>
+        </div>
+      </form>
+
+      {{ search.s }}
+    </div>
+    <div class="column is-full">
+      <div class="columns">
+        <!-- ngFor the results here , play around with the sizings to see what fits best. -->
+      </div>
+    </div>
+  </div>
+</div>

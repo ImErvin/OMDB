@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { OmdbServiceService } from './services/omdb-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'icuc-omdb';
+  search = {
+    s: ''
+  }
+
+  constructor(private omdbService: OmdbServiceService) {}
+
+
+  applySearch(query) {
+    this.omdbService.getMovies(query).subscribe(data => console.log(data));
+  }
 }
