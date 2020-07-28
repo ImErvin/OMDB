@@ -1,5 +1,5 @@
 <div class="container py-5">
-  <div class="columns">
+  <div class="columns is-multiline">
     <div class="column is-full">
       <form>
         <div class="field">
@@ -9,7 +9,7 @@
               type="text"
               placeholder="Enter movie title.."
               [(ngModel)]="search.s"
-              [ngModelOptions]="{standalone: true}"
+              [ngModelOptions]="{ standalone: true }"
             />
             <span class="icon is-small is-left">
               <i class="fas fa-search"></i>
@@ -18,16 +18,54 @@
         </div>
         <div class="field is-pulled-right">
           <div class="control">
-            <button (click)="applySearch(search)" class="button is-link">Search</button>
+            <button (click)="applySearch(search)" class="button is-link">
+              Search
+            </button>
           </div>
         </div>
       </form>
-
-      {{ search.s }}
     </div>
     <div class="column is-full">
-      <div class="columns">
-        <!-- ngFor the results here , play around with the sizings to see what fits best. -->
+      <nav *ngIf="movies?.length" class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Total movies found</p>
+            <p class="title">{{ totalResults }}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Only showing</p>
+            <p class="title">{{ movies.length }}</p>
+          </div>
+        </div>
+      </nav>
+      <div *ngIf="!movies?.length" class="notification is-info has-text-centered">
+        <p class="title">Nothing to show.</p>
+        <p class="subtitle">Enter the name of your movie above and click search!</p>
+      </div>
+      <div class="columns is-multiline">
+        <div *ngFor="let movie of movies" class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="{{ movie.Poster }}" alt="No Poster" />
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4">
+                    <a href="#">{{ movie.Title }}</a>
+                  </p>
+                  <p class="subtitle is-6">{{ movie.Year }}</p>
+                </div>
+              </div>
+
+              <div class="content"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
