@@ -13,6 +13,7 @@ export class MovieDetailsComponent implements OnInit {
     i: null,
     plot: 'full'
   };
+  movie = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +21,7 @@ export class MovieDetailsComponent implements OnInit {
   ) {}
 
   getMovie(query) {
-    this.omdbService.getMovies(query).subscribe(data => console.log(data));
+    this.omdbService.getMovies(query).subscribe(data => this.movie = data);
   }
 
   ngOnInit(): void {

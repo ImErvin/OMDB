@@ -1,1 +1,48 @@
-<p>movie-details works!</p>
+<section class="hero is-white is-bold is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-128x128">
+                <img src="{{ movie.Poster }}" alt="Placeholder image" />
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-1">{{ movie.Title }}</p>
+              <span class="subtitle is-2">
+                Released: <time datetime="2016-1-1">{{ movie.Released }}</time>
+                <br />
+                Director: <strong>{{ movie.Director }}</strong>
+                <div class="tags mt-2">
+                  <span
+                    *ngFor="let actor of movie.Actors.split(',')"
+                    class="tag is-dark is-large"
+                    >{{ actor }}</span
+                  >
+                </div>
+              </span>
+              <p class="subtitle is-3"></p>
+            </div>
+            <div class="media-right">
+              <div class="tags">
+                <span
+                    *ngFor="let rating of movie.Ratings"
+                    class="tag is-dark is-medium"
+                    >{{rating.Source}} : {{ rating.Value }}<br/></span
+                  >
+              </div>
+            </div>
+          </div>
+
+          <div class="content">
+            <p class="subtitle is-4">
+              <i>{{ movie.Plot }}</i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

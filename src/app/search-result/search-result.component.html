@@ -1,0 +1,23 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="{{ movie.Poster }}" />
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>
+          <a [routerLink]="['/movie', movie.imdbID]">{{ movie.Title }}</a>
+        </strong>
+        <br />
+        <small>{{ movie.Year }}</small>
+      </p>
+    </div>
+  </div>
+  <div class="media-right">
+    <div class="control">
+      <span class="tag is-dark">{{ movie.Type }}</span>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,8 @@
+<div class="columns is-multiline py-5 px-5">
+  <div class="column is-full">
+    <app-search-bar (searched)="onSearched($event)"></app-search-bar>
+  </div>
+  <div class="column is-full">
+    <app-search-results [movies]="movies"></app-search-results>
+  </div>
+</div>
