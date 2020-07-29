@@ -1,10 +1,7 @@
 <section class="hero is-white is-bold is-fullheight">
   <div class="hero-body">
     <div class="container">
-      <button
-        (click)="goBack()"
-        class="button is-dark mb-5 is-light"
-      >
+      <button (click)="goBack()" class="button is-dark mb-5 is-light">
         Back
       </button>
 
@@ -21,6 +18,14 @@
           </figure>
           <div class="media-content">
             <div class="content">
+              <div *ngIf="movie?.Genre !== 'N/A'" class="tags">
+                <span
+                  *ngFor="let genre of movie?.Genre.split(',')"
+                  class="tag is-white is-small"
+                >
+                  {{ genre }}
+                </span>
+              </div>
               <p>
                 <span class="title is-2">{{ movie?.Title }}</span>
                 <br />
@@ -31,17 +36,24 @@
                 <span *ngIf="movie?.Released" class="subtitle is-4">
                   Released on {{ movie?.Released }}
                 </span>
+                <br />
+                <span *ngIf="movie?.Runtime !== 'N/A'" class="subtitle is-6">
+                  Runtime: {{ movie?.Runtime }}
+                </span>
+                <br />
+                <span *ngIf="movie?.Awards !== 'N/A'" class="subtitle is-6">
+                  {{ movie?.Awards }}
+                </span>
               </p>
               <section *ngIf="movie?.Ratings.length > 0" class="mt-4">
                 <span class="title is-5">Ratings</span>
                 <div class="tags">
-                  <div class="tags">
-                    <span
-                      *ngFor="let rating of movie?.Ratings"
-                      class="tag is-dark is-small"
-                      >{{ rating?.Source }} : {{ rating?.Value }}<br
-                    /></span>
-                  </div>
+                  <span
+                    *ngFor="let rating of movie?.Ratings"
+                    class="tag is-dark is-small"
+                  >
+                    {{ rating?.Source }} : {{ rating?.Value }}
+                  </span>
                 </div>
               </section>
               <section *ngIf="movie?.Actors" class="mt-4">
@@ -62,7 +74,6 @@
               </section>
             </div>
           </div>
-          <div class="media-right"></div>
         </article>
       </section>
     </div>
