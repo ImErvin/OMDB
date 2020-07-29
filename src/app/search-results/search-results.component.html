@@ -21,6 +21,9 @@
       </div>
     </nav>
   </div>
+  <div *ngFor="let movie of movies" class="column is-half">
+    <app-search-result [movie]="movie"></app-search-result>
+  </div>
   <div class="column is-full">
     <nav
       class="pagination is-pulled-right"
@@ -31,17 +34,16 @@
         *ngIf="hasPrev"
         (click)="remPage(searchQuery)"
         class="pagination-previous button is-dark"
-        >Previous</button
       >
+        Previous
+      </button>
       <button
         *ngIf="hasNext"
         (click)="addPage(searchQuery)"
         class="pagination-next button is-dark"
-        >Next page</button
       >
+        Next page
+      </button>
     </nav>
-  </div>
-  <div *ngFor="let movie of movies" class="column is-half">
-    <app-search-result [movie]="movie"></app-search-result>
   </div>
 </div>
