@@ -19,7 +19,7 @@
     <div class="column is-one-fifth">
       <div class="field">
         <div class="control">
-          <button (click)="search(searchQuery)" class="button is-fullwidth is-link">
+          <button [routerLink]="['/search', searchQuery.s]" class="button is-fullwidth is-link">
             Search
           </button>
         </div>

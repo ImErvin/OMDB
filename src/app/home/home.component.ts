@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OmdbServiceService } from '../services/omdb-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +9,34 @@ import { OmdbServiceService } from '../services/omdb-service.service';
 })
 export class HomeComponent implements OnInit {
   movies = [];
+  totalRecords = 0;
+  response = null;
 
-  constructor(private omdbService: OmdbServiceService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private omdbService: OmdbServiceService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe(({ searchString }) => {
+      if (searchString) {
+        this.queryMovies({
+          s: searchString,
+          type: 'movie',
+          page: 1
+        });
+      }
+    });
+  }
 
   queryMovies(query) {
-    this.omdbService
-      .getMovies(query)
-      .subscribe(data => (this.movies = data['Search']));
+    const setLocalVariables = ({ Search, totalResults, Response }) => {
+      this.movies = Search;
+      this.totalRecords = totalResults;
+      this.response = Response;
+    };
+
+    this.omdbService.getMovies(query).subscribe(setLocalVariables);
   }
 
   onSearched(query) {

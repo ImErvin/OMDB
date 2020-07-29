@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'search/:searchString', component: HomeComponent},
   { path: 'movie/:imdbId', component: MovieDetailsComponent}
 ];
 

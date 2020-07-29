@@ -3,6 +3,10 @@
     <app-search-bar (searched)="onSearched($event)"></app-search-bar>
   </div>
   <div class="column is-full">
-    <app-search-results [movies]="movies"></app-search-results>
+    <app-search-results
+      [movies]="movies"
+      [totalRecords]="totalRecords"
+      [response]="response"
+    ></app-search-results>
   </div>
 </div>
