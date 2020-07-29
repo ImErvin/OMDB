@@ -13,5 +13,6 @@ My submission for the ICUC technical assessment.
     5. Run npm install
     6. Run ng serve
     7. Navigate to localhost:4200 on your latest Google Chrome
-    7. Ensure that you have a stable internet connection or the results may vary :D
-    
+    8. Ensure that you have a stable internet connection or the results may vary :D
+    EXTRA:
+    For the best results, use on a 1920x1080 Monitor with the browser in fullscreen mode!
