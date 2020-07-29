@@ -1,101 +1,70 @@
 <section class="hero is-white is-bold is-fullheight">
   <div class="hero-body">
     <div class="container">
-      <button (click)="goBack()" class="button is-dark is-rounded mb-5 is-light">Back</button>
+      <button
+        (click)="goBack()"
+        class="button is-dark mb-5 is-light"
+      >
+        Back
+      </button>
 
-      <!-- <div class="card">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-128x128">
-                <img src="{{ movie.Poster }}" alt="Placeholder image" />
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-1">{{ movie.Title }}</p>
-              <span class="subtitle is-2">
-                Released: <time datetime="2016-1-1">{{ movie.Released }}</time>
+      <section>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image">
+              <img *ngIf="movie?.Poster !== 'N/A'" src="{{ movie?.Poster }}" />
+              <img
+                *ngIf="movie?.Poster === 'N/A'"
+                src="https://media.comicbook.com/files/img/default-movie.png"
+              />
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <span class="title is-2">{{ movie?.Title }}</span>
                 <br />
-                Director: <strong>{{ movie.Director }}</strong>
-                <div class="tags mt-2">
+                <span *ngIf="movie?.Director !== 'N/A'" class="subtitle is-3">
+                  Directed By <strong>{{ movie?.Director }}</strong>
+                </span>
+                <br />
+                <span *ngIf="movie?.Released" class="subtitle is-4">
+                  Released on {{ movie?.Released }}
+                </span>
+              </p>
+              <section *ngIf="movie?.Ratings.length > 0" class="mt-4">
+                <span class="title is-5">Ratings</span>
+                <div class="tags">
+                  <div class="tags">
+                    <span
+                      *ngFor="let rating of movie?.Ratings"
+                      class="tag is-dark is-small"
+                      >{{ rating?.Source }} : {{ rating?.Value }}<br
+                    /></span>
+                  </div>
+                </div>
+              </section>
+              <section *ngIf="movie?.Actors" class="mt-4">
+                <span class="title is-5">Actors</span>
+                <div class="tags">
                   <span
-                    *ngFor="let actor of movie.Actors.split(',')"
-                    class="tag is-dark is-large"
+                    *ngFor="let actor of movie?.Actors.split(',')"
+                    class="tag is-dark is-small"
                     >{{ actor }}</span
                   >
                 </div>
-              </span>
-              <p class="subtitle is-3"></p>
-            </div>
-            <div class="media-right">
-              <div class="tags">
-                <span
-                    *ngFor="let rating of movie.Ratings"
-                    class="tag is-dark is-medium"
-                    >{{rating.Source}} : {{ rating.Value }}<br/></span
-                  >
-              </div>
+              </section>
+              <section class="mt-4">
+                <span class="title is-5">Plot</span>
+                <p>
+                  {{ movie?.Plot }}
+                </p>
+              </section>
             </div>
           </div>
-
-          <div class="content">
-            <p class="subtitle is-4">
-              <i>{{ movie.Plot }}</i>
-            </p>
-          </div>
-        </div>
-      </div> -->
-      <article class="media">
-        <figure class="media-left">
-          <p class="image">
-            <img src="{{ movie.Poster }}" />
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <span class="title is-2">{{ movie.Title }}</span>
-              <br />
-              <span *ngIf="movie.Director" class="subtitle is-3">
-                Directed By <strong>{{ movie.Director }}</strong>
-              </span>
-              <br />
-              <span *ngIf="movie.Released" class="subtitle is-4">
-                Released on {{ movie.Released }}
-              </span>
-            </p>
-            <section *ngIf="movie.Ratings.length > 0" class="mt-4">
-              <span class="title is-5">Ratings</span>
-              <div class="tags">
-                <div class="tags">
-                  <span
-                    *ngFor="let rating of movie.Ratings"
-                    class="tag is-dark is-small"
-                    >{{ rating.Source }} : {{ rating.Value }}<br
-                  /></span>
-                </div>
-              </div>
-            </section>
-            <section *ngIf="movie.Actors" class="mt-4">
-              <span class="title is-5">Actors</span>
-              <div class="tags">
-                <span
-                  *ngFor="let actor of movie.Actors.split(',')"
-                  class="tag is-dark is-small"
-                  >{{ actor }}</span
-                >
-              </div>
-            </section>
-            <section class="mt-4">
-              <span class="title is-5">Plot</span>
-              <p>
-                {{ movie.Plot }}
-              </p>
-            </section>
-          </div>
-        </div>
-        <div class="media-right"></div>
-      </article>
+          <div class="media-right"></div>
+        </article>
+      </section>
     </div>
   </div>
 </section>

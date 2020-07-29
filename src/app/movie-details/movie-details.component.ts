@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OmdbServiceService } from '../services/omdb-service.service';
-import {Location} from '@angular/common';
-
+import { OmdbApiService } from '../services/omdb-api.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-movie-details',
@@ -10,7 +9,6 @@ import {Location} from '@angular/common';
   styleUrls: ['./movie-details.component.sass']
 })
 export class MovieDetailsComponent implements OnInit {
-  imdbID = null;
   query = {
     i: null,
     plot: 'full'
@@ -19,22 +17,42 @@ export class MovieDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private omdbService: OmdbServiceService,
+    private omdbService: OmdbApiService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.query.i = params['imdbId'];
-      this.getMovie(this.query);
-    });
+    this.getQueryFromParams();
   }
 
-  getMovie(query) {
-    this.omdbService.getMovies(query).subscribe(data => this.movie = data);
+  getQueryFromParams(): void {
+    const extractParams = ({ imdbId }) => {
+      if (imdbId) {
+        this.query.i = imdbId;
+        this.getMovie(this.query);
+      }
+    };
+
+    this.route.params.subscribe(extractParams);
   }
 
-  goBack() {
+  getMovie(query): void {
+    const parseData = ({ Response, ...data }) => {
+      if (Response === 'False') {
+        return this.goHome();
+      }
+      this.movie = data;
+    };
+
+    this.omdbService.getMovies(query).subscribe(parseData);
+  }
+
+  goHome(): void {
+    this.location.go('/');
+    window.location.reload();
+  }
+
+  goBack(): void {
     this.location.back();
   }
 }

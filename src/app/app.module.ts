@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchResultComponent } from './search-result/search-result.component';
     HomeComponent,
     SearchBarComponent,
     SearchResultsComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

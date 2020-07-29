@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { OmdbServiceService } from './omdb-service.service';
+import { OmdbApiService } from './omdb-api.service';
 
-describe('OmdbServiceService', () => {
-  let service: OmdbServiceService;
+describe('OmdbApiService', () => {
+  let service: OmdbApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(OmdbServiceService);
+    service = TestBed.inject(OmdbApiService);
   });
 
   it('should be created', () => {

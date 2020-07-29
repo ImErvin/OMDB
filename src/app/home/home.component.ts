@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OmdbServiceService } from '../services/omdb-service.service';
+import { OmdbApiService } from '../services/omdb-api.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,35 +11,47 @@ export class HomeComponent implements OnInit {
   movies = [];
   totalRecords = 0;
   response = null;
+  searchParam = 's';
+  pageNum = 1;
+  searchQuery = null;
 
   constructor(
     private route: ActivatedRoute,
-    private omdbService: OmdbServiceService
+    private omdbService: OmdbApiService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(({ searchString }) => {
-      if (searchString) {
-        this.queryMovies({
-          s: searchString,
-          type: 'movie',
-          page: 1
-        });
-      }
-    });
+    this.getQueryFromQueryParams(this.searchParam);
   }
 
-  queryMovies(query) {
+  getQueryFromQueryParams(paramEntry): void {
+    const extractParams = params => {
+      if (params[paramEntry]) {
+        this.queryMovies(params);
+        this.pageNum = params['page'];
+        this.searchQuery = params;
+      }
+    };
+
+    this.route.queryParams.subscribe(extractParams);
+  }
+
+  queryMovies(query): void {
     const setLocalVariables = ({ Search, totalResults, Response }) => {
       this.movies = Search;
       this.totalRecords = totalResults;
       this.response = Response;
     };
+    // Could use some error handling but OMDb API is not the greatest for sending error states..
 
     this.omdbService.getMovies(query).subscribe(setLocalVariables);
   }
 
-  onSearched(query) {
-    this.queryMovies(query);
+  hasNext(): boolean{
+    return this.pageNum < Math.ceil(this.totalRecords / 10);
+  }
+
+  hasPrev(): boolean{
+    return this.pageNum > 1;
   }
 }

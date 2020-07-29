@@ -1,20 +1,9 @@
 <div class="columns is-multiline">
-  <div *ngIf="response === null" class="column is-full">
-    <div class="notification is-white has-text-centered">
-      <p class="title">Welcome 🙂</p>
-      <p class="subtitle">
-        Enter the title of your movie in the search bar above!
-      </p>
-    </div>
-  </div>
   <div *ngIf="response === 'False'" class="column is-full">
-    <div class="notification is-white has-text-centered">
-      <p class="title">Nothing to show 😢</p>
-      <p class="subtitle">
-        There was an issue loading your request, try adding more information to
-        your search!
-      </p>
-    </div>
+    <app-notification
+      title="Nothing to show.."
+      subtitle="Modify your search and try again!"
+    ></app-notification>
   </div>
   <div class="column is-full">
     <nav *ngIf="movies?.length" class="level">
@@ -30,6 +19,26 @@
           <p class="title">{{ movies.length }}</p>
         </div>
       </div>
+    </nav>
+  </div>
+  <div class="column is-full">
+    <nav
+      class="pagination is-pulled-right"
+      role="navigation"
+      aria-label="pagination"
+    >
+      <button
+        *ngIf="hasPrev"
+        (click)="remPage(searchQuery)"
+        class="pagination-previous button is-dark"
+        >Previous</button
+      >
+      <button
+        *ngIf="hasNext"
+        (click)="addPage(searchQuery)"
+        class="pagination-next button is-dark"
+        >Next page</button
+      >
     </nav>
   </div>
   <div *ngFor="let movie of movies" class="column is-half">

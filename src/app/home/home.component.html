@@ -1,12 +1,24 @@
-<div class="columns is-multiline py-5 px-5">
-  <div class="column is-full">
-    <app-search-bar (searched)="onSearched($event)"></app-search-bar>
+<section class="hero is-white is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-multiline py-5 px-5">
+        <div class="column is-full">
+          <app-notification title="🐮 Moovie 🐮" subtitle='Search the "Greatest" movie database'></app-notification>
+        </div>
+        <div class="column is-full">
+          <app-search-bar></app-search-bar>
+        </div>
+        <div class="column is-full">
+          <app-search-results
+            [movies]="movies"
+            [totalRecords]="totalRecords"
+            [response]="response"
+            [searchQuery]="searchQuery"
+            [hasNext]="hasNext()"
+            [hasPrev]="hasPrev()"
+          ></app-search-results>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="column is-full">
-    <app-search-results
-      [movies]="movies"
-      [totalRecords]="totalRecords"
-      [response]="response"
-    ></app-search-results>
-  </div>
-</div>
+</section>

@@ -4,7 +4,7 @@
       <div class="field">
         <p class="control has-icons-left">
           <input
-            class="input"
+            class="input is-dark"
             type="text"
             placeholder="Enter movie title.."
             [(ngModel)]="searchQuery.s"
@@ -19,7 +19,11 @@
     <div class="column is-one-fifth">
       <div class="field">
         <div class="control">
-          <button [routerLink]="['/search', searchQuery.s]" class="button is-fullwidth is-link">
+          <button
+            [routerLink]="['/search']"
+            [queryParams]="searchQuery"
+            class="button is-fullwidth is-dark"
+          >
             Search
           </button>
         </div>

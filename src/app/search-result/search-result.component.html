@@ -1,7 +1,14 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <img src="{{ movie.Poster }}" />
+      <img
+        *ngIf="movie.Poster !== 'N/A'; else defaultPicture"
+        src="{{ movie.Poster }}"
+      />
+
+      <ng-template #defaultPicture>
+        <img src="https://media.comicbook.com/files/img/default-movie.png" />
+      </ng-template>
     </p>
   </figure>
   <div class="media-content">
@@ -13,11 +20,6 @@
         <br />
         <small>{{ movie.Year }}</small>
       </p>
-    </div>
-  </div>
-  <div class="media-right">
-    <div class="control">
-      <span class="tag is-dark">{{ movie.Type }}</span>
     </div>
   </div>
 </article>
