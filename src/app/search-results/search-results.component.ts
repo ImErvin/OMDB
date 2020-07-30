@@ -18,7 +18,7 @@ export class SearchResultsComponent {
 
   changePage = strategy => searchQuery => {
     const { page, ...copiedSearchQuery } = searchQuery;
-    let pageAsInt = parseInt(page, 10);
+    const pageAsInt = parseInt(page, 10);
 
     copiedSearchQuery['page'] = strategy(pageAsInt);
 

@@ -2,8 +2,8 @@
   <figure class="media-left">
     <p class="image is-64x64">
       <img
-        *ngIf="movie.Poster !== 'N/A'; else defaultPicture"
-        src="{{ movie.Poster }}"
+        *ngIf="movie?.Poster !== 'N/A'; else defaultPicture"
+        src="{{ movie?.Poster }}"
       />
 
       <ng-template #defaultPicture>
@@ -15,10 +15,10 @@
     <div class="content">
       <p>
         <strong>
-          <a [routerLink]="['/movie', movie.imdbID]">{{ movie.Title }}</a>
+          <a [routerLink]="['/movie', movie?.imdbID]">{{ movie?.Title }}</a>
         </strong>
         <br />
-        <small>{{ movie.Year }}</small>
+        <small>{{ movie?.Year }}</small>
       </p>
     </div>
   </div>
